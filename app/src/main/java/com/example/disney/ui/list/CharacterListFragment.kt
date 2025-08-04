@@ -1,6 +1,7 @@
 package com.example.disney.ui.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,13 +13,12 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.disney.databinding.FragmentCharacterListBinding
-import com.example.disney.model.DisneyCharacter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CharacterListFragment : Fragment() {
+
     private var _binding: FragmentCharacterListBinding? = null
     private val binding get() = _binding!!
 
@@ -58,6 +58,7 @@ class CharacterListFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.characters.collect { characters ->
+                    Log.d("CharacterListFragment", "Empfangene Liste: ${characters.size}")
                     adapter.submitList(characters)
                 }
             }

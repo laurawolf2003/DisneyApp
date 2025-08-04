@@ -1,9 +1,9 @@
 package com.example.disney.data.remote
 
-import com.example.disney.model.DisneyCharacter
+import com.example.disney.model.DisneyApiResponse
 import retrofit2.http.GET
 
 interface DisneyApi {
-    @GET("characters")
-    suspend fun getCharacters(): List<DisneyCharacter>
+    @GET("character")  // <-- wichtig: nicht "characters"
+    suspend fun getCharacters(): DisneyApiResponse
 }
