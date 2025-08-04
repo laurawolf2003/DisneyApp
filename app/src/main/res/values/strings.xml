@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">blubb</string>
+    <string name="character_image">Character image</string>
+    <string name="films">Films:</string>
+    <string name="tv_shows">TV Shows:</string>
+    <string name="video_games">Video Games:</string>
+</resources>
