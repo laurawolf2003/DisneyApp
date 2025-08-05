@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.disney.databinding.FragmentCharacterListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class CharacterListFragment : Fragment() {
@@ -37,6 +39,7 @@ class CharacterListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
+        setupSearchView()
         observeViewModel()
         viewModel.loadCharacters()
     }
@@ -54,11 +57,27 @@ class CharacterListFragment : Fragment() {
         }
     }
 
+    private fun setupSearchView() {
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.setSearchQuery(query ?: "")
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.setSearchQuery(newText ?: "")
+                return true
+            }
+        })
+    }
+
     private fun observeViewModel() {
+        // Beobachte die gefilterte Liste!
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.characters.collect { characters ->
-                    Log.d("CharacterListFragment", "Empfangene Liste: ${characters.size}")
+                viewModel.filteredCharacters.collect { characters ->
+                    Log.d("CharacterListFragment", "Gefilterte Liste: ${characters.size}")
                     adapter.submitList(characters)
                 }
             }

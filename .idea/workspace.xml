@@ -5,6 +5,11 @@
       <config />
     </shared>
     <layouts>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_character_detail.xml">
+        <config>
+          <theme>@style/Theme.DISNEY</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_character_list.xml">
         <config>
           <theme>@style/Theme.DISNEY</theme>
@@ -21,9 +26,16 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa8dcf5d-5c06-42c9-b4eb-fe788308faaa" name="Changes" comment="loading fix">
+    <list default="true" id="aa8dcf5d-5c06-42c9-b4eb-fe788308faaa" name="Changes" comment="alphabetic order of characters">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/disney/ui/list/CharacterListFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/disney/ui/list/CharacterListFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/disney/ui/list/CharacterListViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/disney/ui/list/CharacterListViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_character_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_character_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_character.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_character.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,24 +238,33 @@
       <option name="project" value="LOCAL" />
       <updated>1754414722213</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="alphabetic order of characters">
+      <option name="closed" value="true" />
+      <created>1754415171877</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1754415171877</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="loading fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="loading fix" />
+    <MESSAGE value="alphabetic order of characters" />
+    <option name="LAST_COMMIT_MESSAGE" value="alphabetic order of characters" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
         <entry key="com.example.disney">
           <value>
-            <CheckInfo lastCheckTimestamp="1754328096835" />
+            <CheckInfo lastCheckTimestamp="1754417130176" />
           </value>
         </entry>
         <entry key="com.example.disney.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1754328106699" />
+            <CheckInfo lastCheckTimestamp="1754417130176" />
           </value>
         </entry>
       </map>
