@@ -34,7 +34,8 @@ class CharacterListViewModel @Inject constructor(
             _isLoading.value = true
             repository.refreshCharacters()
             repository.getCharacters().collect { characters ->
-                _characters.value = characters
+                // Sortiere alphabetisch nach Name
+                _characters.value = characters.sortedBy { it.name }
                 _isLoading.value = false
             }
         }
