@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.disney.databinding.ItemCharacterBinding
 import com.example.disney.model.DisneyCharacter
 
@@ -23,26 +22,16 @@ class CharacterListAdapter(
     }
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
-        val character = getItem(position)
-        holder.bind(character)
+        holder.bind(getItem(position))
     }
 
     inner class CharacterViewHolder(
         private val binding: ItemCharacterBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(character: DisneyCharacter) {
-            binding.characterName.text = character.name
-
-            character.imageUrl?.let { imageUrl ->
-                Glide.with(binding.root.context)
-                    .load(imageUrl)
-                    .centerCrop()
-                    .into(binding.characterImage)
-            }
-
-            binding.root.setOnClickListener {
-                onItemClick(character)
-            }
+            binding.character = character
+            binding.executePendingBindings()
+            binding.root.setOnClickListener { onItemClick(character) }
         }
     }
 
