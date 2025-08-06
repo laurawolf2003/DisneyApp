@@ -39,7 +39,7 @@ class CharacterListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupSearchView()
-        setupFavoritesButton() // NEU: Favoriten-Button Setup
+        setupFavoritesButton()
         observeViewModel()
         viewModel.loadCharacters()
     }
@@ -73,18 +73,30 @@ class CharacterListFragment : Fragment() {
                 return true
             }
         })
+
+        // Dynamisches Verschieben des Buttons bei Fokus auf die Suchleiste
+        binding.searchView.setOnQueryTextFocusChangeListener { _, hasFocus ->
+            if (hasFocus) {
+                binding.favoritesButton.visibility = View.GONE
+                binding.favoritesButtonVertical.visibility = View.VISIBLE
+            } else {
+                binding.favoritesButton.visibility = View.VISIBLE
+                binding.favoritesButtonVertical.visibility = View.GONE
+            }
+        }
     }
 
     private fun setupFavoritesButton() {
-        binding.favoritesButton.setOnClickListener {
+        val listener = View.OnClickListener {
             findNavController().navigate(
                 CharacterListFragmentDirections.actionCharacterListFragmentToFavoritesFragment()
             )
         }
+        binding.favoritesButton.setOnClickListener(listener)
+        binding.favoritesButtonVertical.setOnClickListener(listener)
     }
 
     private fun observeViewModel() {
-        // Beobachte die gefilterte Liste!
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.filteredCharacters.collect { characters ->

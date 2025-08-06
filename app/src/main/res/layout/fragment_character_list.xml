@@ -10,23 +10,43 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Suchleiste oben einfügen -->
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+        <!-- Zeile: Suchleiste und Favoriten-Button nebeneinander -->
+        <LinearLayout
+            android:id="@+id/searchRow"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:iconifiedByDefault="false"
-            android:queryHint="Charakter suchen..."
-            android:layout_marginTop="16dp"/>
+            android:paddingTop="16dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="8dp">
 
-        <!-- Favoriten-Button -->
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:iconifiedByDefault="true"
+                android:queryHint="Charakter suchen..."/>
+
+            <Button
+                android:id="@+id/favoritesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Favoriten anzeigen"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+        <!-- Favoriten-Button für die vertikale Ansicht, initial unsichtbar -->
         <Button
-            android:id="@+id/favoritesButton"
+            android:id="@+id/favoritesButtonVertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Favoriten anzeigen"
+            android:visibility="gone"
             android:layout_gravity="end"
-            android:layout_margin="8dp"/>
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="4dp"/>
 
         <!--  RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView

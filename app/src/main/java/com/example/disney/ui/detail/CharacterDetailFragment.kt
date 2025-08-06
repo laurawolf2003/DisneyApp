@@ -9,10 +9,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.disney.databinding.FragmentCharacterDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -21,6 +21,7 @@ class CharacterDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: CharacterDetailViewModel by viewModels()
+    private val args: CharacterDetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +35,7 @@ class CharacterDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val characterId = arguments?.getInt("characterId") ?: return
+        val characterId = args.characterId
         viewModel.loadCharacter(characterId)
         observeViewModel()
     }
@@ -44,17 +45,27 @@ class CharacterDetailFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.character.collect { character ->
                     character?.let { char ->
-                        binding.characterName.text = char.name
-
+                        // Bild anzeigen
                         char.imageUrl?.let { imageUrl ->
                             Glide.with(requireContext())
                                 .load(imageUrl)
+                                .placeholder(android.R.drawable.ic_menu_gallery)
+                                .error(android.R.drawable.ic_menu_report_image)
                                 .into(binding.characterImage)
-                        }
+                        } ?: binding.characterImage.setImageResource(android.R.drawable.ic_menu_gallery)
 
-                        binding.films.text = char.films?.joinToString("\n") ?: "No films"
-                        binding.tvShows.text = char.tvShows?.joinToString("\n") ?: "No TV shows"
-                        binding.videoGames.text = char.videoGames?.joinToString("\n") ?: "No video games"
+                        // Name anzeigen
+                        binding.characterName.text = char.name
+
+                        // Listen mit Überschriften
+                        binding.films.text = if (char.films.isNullOrEmpty()) "Keine Filme vorhanden."
+                        else "Filme:\n${char.films.joinToString(separator = "\n")}"
+
+                        binding.tvShows.text = if (char.tvShows.isNullOrEmpty()) "Keine TV-Shows vorhanden."
+                        else "TV-Shows:\n${char.tvShows.joinToString(separator = "\n")}"
+
+                        binding.videoGames.text = if (char.videoGames.isNullOrEmpty()) "Keine Videospiele vorhanden."
+                        else "Videospiele:\n${char.videoGames.joinToString(separator = "\n")}"
                     }
                 }
             }
