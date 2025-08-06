@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.navigation.fragment.findNavController
 import com.example.disney.databinding.FragmentFavoritesBinding
 import com.example.disney.ui.list.CharacterListAdapter
 import com.example.disney.ui.list.CharacterListViewModel
@@ -36,7 +37,13 @@ class FavoritesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = CharacterListAdapter(
-            onItemClick = {}, // z.B. Details
+            onItemClick = { character ->
+                // Navigation zur Detailansicht des Charakters
+                findNavController().navigate(
+                    com.example.disney.ui.favorites.FavoritesFragmentDirections
+                        .actionFavoritesFragmentToCharacterDetailFragment(character._id)
+                )
+            },
             onFavoriteClick = { viewModel.toggleFavorite(it) }
         )
         binding.favoritesRecyclerView.layoutManager = LinearLayoutManager(requireContext())

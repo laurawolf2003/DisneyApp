@@ -13,7 +13,6 @@ class CharacterListAdapter(
     private val onFavoriteClick: (DisneyCharacter) -> Unit
 ) : ListAdapter<DisneyCharacter, CharacterListAdapter.CharacterViewHolder>(DiffCallback()) {
 
-    // Fester Listener, der NICHT rekursiv ist und nur die Lambda aufruft!
     private val favoriteClickListener = object : OnFavoriteClickListener {
         override fun onFavoriteClick(character: DisneyCharacter) {
             onFavoriteClick.invoke(character)

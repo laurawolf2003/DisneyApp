@@ -13,7 +13,6 @@
         <action
             android:id="@+id/actionCharacterListFragmentToCharacterDetailFragment"
             app:destination="@id/characterDetailFragment" />
-        <!-- Neue Action zur Favoritenansicht -->
         <action
             android:id="@+id/actionCharacterListFragmentToFavoritesFragment"
             app:destination="@id/favoritesFragment" />
@@ -29,10 +28,14 @@
             app:argType="integer" />
     </fragment>
 
-    <!-- Favoriten-Fragment hinzufügen -->
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.disney.ui.favorites.FavoritesFragment"
         android:label="Favoriten"
-        tools:layout="@layout/fragment_favorites" />
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/actionFavoritesFragmentToCharacterDetailFragment"
+            app:destination="@id/characterDetailFragment" />
+    </fragment>
+
 </navigation>
