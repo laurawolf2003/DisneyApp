@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.disney.databinding.FragmentFavoritesBinding
-import com.example.disney.model.DisneyCharacter
 import com.example.disney.ui.list.CharacterListAdapter
 import com.example.disney.ui.list.CharacterListViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +21,6 @@ class FavoritesFragment : Fragment() {
 
     private var _binding: FragmentFavoritesBinding? = null
     private val binding get() = _binding!!
-    // KORREKTE Hilt ViewModel Initialisierung:
     private val viewModel: CharacterListViewModel by viewModels()
     private lateinit var adapter: CharacterListAdapter
 
