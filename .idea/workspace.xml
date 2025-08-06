@@ -66,16 +66,8 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa8dcf5d-5c06-42c9-b4eb-fe788308faaa" name="Changes" comment="Favoritisierung der Charaktäre">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/detail_image_bg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/detail_list_bg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.13/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+    <list default="true" id="aa8dcf5d-5c06-42c9-b4eb-fe788308faaa" name="Changes" comment="Charakterdetaildesign">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/disney/ui/detail/CharacterDetailFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/disney/ui/detail/CharacterDetailFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_character_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_character_detail.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -319,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1754495166428</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Charakterdetaildesign">
+      <option name="closed" value="true" />
+      <created>1754505717055</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1754505717055</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -327,7 +327,8 @@
     <MESSAGE value="alphabetic order of characters" />
     <MESSAGE value="Suchleiste" />
     <MESSAGE value="Favoritisierung der Charaktäre" />
-    <option name="LAST_COMMIT_MESSAGE" value="Favoritisierung der Charaktäre" />
+    <MESSAGE value="Charakterdetaildesign" />
+    <option name="LAST_COMMIT_MESSAGE" value="Charakterdetaildesign" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
