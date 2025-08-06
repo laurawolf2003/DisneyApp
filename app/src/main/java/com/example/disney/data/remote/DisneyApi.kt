@@ -4,6 +4,6 @@ import com.example.disney.model.DisneyApiResponse
 import retrofit2.http.GET
 
 interface DisneyApi {
-    @GET("character")  // <-- wichtig: nicht "characters"
+    @GET("character")
     suspend fun getCharacters(): DisneyApiResponse
 }

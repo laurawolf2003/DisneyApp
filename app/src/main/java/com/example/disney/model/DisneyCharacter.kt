@@ -7,7 +7,7 @@ import androidx.room.TypeConverters
 import com.example.disney.data.local.Converters
 
 @Entity(tableName = "characters")
-@TypeConverters(Converters::class) // Converter hinzufügen
+
 data class DisneyCharacter(
     @PrimaryKey val _id: Int,
     val name: String,
@@ -17,5 +17,6 @@ data class DisneyCharacter(
     val videoGames: List<String>?,
     val allies: List<String>?,
     val enemies: List<String>?,
-    val url: String
+    val url: String,
+    val isFavorite: Boolean = false
 )

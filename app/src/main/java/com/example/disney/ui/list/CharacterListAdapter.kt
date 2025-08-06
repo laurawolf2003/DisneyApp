@@ -9,8 +9,16 @@ import com.example.disney.databinding.ItemCharacterBinding
 import com.example.disney.model.DisneyCharacter
 
 class CharacterListAdapter(
-    private val onItemClick: (DisneyCharacter) -> Unit
+    private val onItemClick: (DisneyCharacter) -> Unit,
+    private val onFavoriteClick: (DisneyCharacter) -> Unit
 ) : ListAdapter<DisneyCharacter, CharacterListAdapter.CharacterViewHolder>(DiffCallback()) {
+
+    // Fester Listener, der NICHT rekursiv ist und nur die Lambda aufruft!
+    private val favoriteClickListener = object : OnFavoriteClickListener {
+        override fun onFavoriteClick(character: DisneyCharacter) {
+            onFavoriteClick.invoke(character)
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val binding = ItemCharacterBinding.inflate(
@@ -18,18 +26,21 @@ class CharacterListAdapter(
             parent,
             false
         )
-        return CharacterViewHolder(binding)
+        return CharacterViewHolder(binding, onItemClick, favoriteClickListener)
     }
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    inner class CharacterViewHolder(
-        private val binding: ItemCharacterBinding
+    class CharacterViewHolder(
+        private val binding: ItemCharacterBinding,
+        private val onItemClick: (DisneyCharacter) -> Unit,
+        private val onFavoriteClickListener: OnFavoriteClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(character: DisneyCharacter) {
             binding.character = character
+            binding.onFavoriteClick = onFavoriteClickListener
             binding.executePendingBindings()
             binding.root.setOnClickListener { onItemClick(character) }
         }
@@ -39,7 +50,6 @@ class CharacterListAdapter(
         override fun areItemsTheSame(oldItem: DisneyCharacter, newItem: DisneyCharacter): Boolean {
             return oldItem._id == newItem._id
         }
-
         override fun areContentsTheSame(oldItem: DisneyCharacter, newItem: DisneyCharacter): Boolean {
             return oldItem == newItem
         }

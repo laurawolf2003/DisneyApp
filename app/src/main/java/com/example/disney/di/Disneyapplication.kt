@@ -8,6 +8,6 @@ import timber.log.Timber
 class DisneyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        Timber.tag("App").d("Application started") // Prüfen Sie Logcat
+        Timber.tag("App").d("Application started")
     }
 }

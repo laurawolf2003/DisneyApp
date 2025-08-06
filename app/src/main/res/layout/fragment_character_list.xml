@@ -19,7 +19,16 @@
             android:queryHint="Charakter suchen..."
             android:layout_marginTop="16dp"/>
 
-        <!-- Dein RecyclerView (wie gehabt) -->
+        <!-- Favoriten-Button -->
+        <Button
+            android:id="@+id/favoritesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Favoriten anzeigen"
+            android:layout_gravity="end"
+            android:layout_margin="8dp"/>
+
+        <!--  RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/charactersRecyclerView"
             android:layout_width="match_parent"

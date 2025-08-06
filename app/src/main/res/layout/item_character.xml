@@ -6,6 +6,9 @@
         <variable
             name="character"
             type="com.example.disney.model.DisneyCharacter" />
+        <variable
+            name="onFavoriteClick"
+            type="com.example.disney.ui.list.OnFavoriteClickListener" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -37,10 +40,21 @@
                 android:text="@{character.name}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Title"
                 app:layout_constraintBottom_toBottomOf="@id/characterImage"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/favoriteButton"
                 app:layout_constraintStart_toEndOf="@id/characterImage"
                 app:layout_constraintTop_toTopOf="@id/characterImage" />
 
+            <ImageButton
+                android:id="@+id/favoriteButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/favorite"
+                app:favoriteIcon="@{character.isFavorite}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:onClick="@{() -> onFavoriteClick.onFavoriteClick(character)}"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </layout>

@@ -17,7 +17,6 @@ import com.example.disney.databinding.FragmentCharacterListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
 class CharacterListFragment : Fragment() {
 
@@ -40,16 +39,22 @@ class CharacterListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         setupSearchView()
+        setupFavoritesButton() // NEU: Favoriten-Button Setup
         observeViewModel()
         viewModel.loadCharacters()
     }
 
     private fun setupRecyclerView() {
-        adapter = CharacterListAdapter { character ->
-            val action = CharacterListFragmentDirections
-                .actionCharacterListFragmentToCharacterDetailFragment(character._id)
-            findNavController().navigate(action)
-        }
+        adapter = CharacterListAdapter(
+            onItemClick = { character ->
+                val action = CharacterListFragmentDirections
+                    .actionCharacterListFragmentToCharacterDetailFragment(character._id)
+                findNavController().navigate(action)
+            },
+            onFavoriteClick = { character ->
+                viewModel.toggleFavorite(character)
+            }
+        )
 
         binding.charactersRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
@@ -58,18 +63,24 @@ class CharacterListFragment : Fragment() {
     }
 
     private fun setupSearchView() {
-
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 viewModel.setSearchQuery(query ?: "")
                 return true
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 viewModel.setSearchQuery(newText ?: "")
                 return true
             }
         })
+    }
+
+    private fun setupFavoritesButton() {
+        binding.favoritesButton.setOnClickListener {
+            findNavController().navigate(
+                CharacterListFragmentDirections.actionCharacterListFragmentToFavoritesFragment()
+            )
+        }
     }
 
     private fun observeViewModel() {
@@ -82,7 +93,6 @@ class CharacterListFragment : Fragment() {
                 }
             }
         }
-
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.isLoading.collect { isLoading ->

@@ -19,11 +19,9 @@ class CharacterListViewModel @Inject constructor(
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
 
-    // Suchtext-State
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery
 
-    // Gefilterte Liste
     val filteredCharacters: StateFlow<List<DisneyCharacter>> = combine(
         characters, searchQuery
     ) { list, query ->
@@ -31,8 +29,12 @@ class CharacterListViewModel @Inject constructor(
         else list.filter { it.name.contains(query, ignoreCase = true) }
     }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
+    private val _favorites = MutableStateFlow<List<DisneyCharacter>>(emptyList())
+    val favorites: StateFlow<List<DisneyCharacter>> = _favorites
+
     init {
         loadCharacters()
+        loadFavorites()
     }
 
     fun loadCharacters() {
@@ -40,7 +42,6 @@ class CharacterListViewModel @Inject constructor(
             _isLoading.value = true
             repository.refreshCharacters()
             repository.getCharacters().collect { characters ->
-                // Sortiere alphabetisch nach Name
                 _characters.value = characters.sortedBy { it.name }
                 _isLoading.value = false
             }
@@ -49,5 +50,20 @@ class CharacterListViewModel @Inject constructor(
 
     fun setSearchQuery(query: String) {
         _searchQuery.value = query
+    }
+
+    fun toggleFavorite(character: DisneyCharacter) {
+        viewModelScope.launch {
+            repository.setFavorite(character._id, !character.isFavorite)
+            loadFavorites()
+        }
+    }
+
+    fun loadFavorites() {
+        viewModelScope.launch {
+            repository.getFavoriteCharacters().collect { favs ->
+                _favorites.value = favs.sortedBy { it.name }
+            }
+        }
     }
 }
