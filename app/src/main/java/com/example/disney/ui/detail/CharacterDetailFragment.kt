@@ -45,7 +45,6 @@ class CharacterDetailFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.character.collect { character ->
                     character?.let { char ->
-                        // Bild anzeigen
                         char.imageUrl?.let { imageUrl ->
                             Glide.with(requireContext())
                                 .load(imageUrl)
@@ -54,18 +53,15 @@ class CharacterDetailFragment : Fragment() {
                                 .into(binding.characterImage)
                         } ?: binding.characterImage.setImageResource(android.R.drawable.ic_menu_gallery)
 
-                        // Name anzeigen
                         binding.characterName.text = char.name
 
-                        // Listen mit Überschriften
+                        // Nur die Werte, KEINE Kategorie davor!
                         binding.films.text = if (char.films.isNullOrEmpty()) "Keine Filme vorhanden."
-                        else "Filme:\n${char.films.joinToString(separator = "\n")}"
-
+                        else char.films.joinToString(separator = "\n")
                         binding.tvShows.text = if (char.tvShows.isNullOrEmpty()) "Keine TV-Shows vorhanden."
-                        else "TV-Shows:\n${char.tvShows.joinToString(separator = "\n")}"
-
+                        else char.tvShows.joinToString(separator = "\n")
                         binding.videoGames.text = if (char.videoGames.isNullOrEmpty()) "Keine Videospiele vorhanden."
-                        else "Videospiele:\n${char.videoGames.joinToString(separator = "\n")}"
+                        else char.videoGames.joinToString(separator = "\n")
                     }
                 }
             }
